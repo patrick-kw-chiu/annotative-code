@@ -1,0 +1,21 @@
+## Getting Started
+
+There are 2 steps to use Annotative Code.
+
+1. `npm i annotative-code`
+2. Select the appropriate `<annotative-code-* />` component.
+
+##### `<annotative-code />` (recommended)
+
+- 😄 You can minimize the bundle size by only passing the relevant `languageFn` to `<annotative-code />`
+- 🧐 Need to manually determine and pass the `languageFn`
+
+##### `<annotative-code-common />`
+
+- 😄 Let [highlight.js](https://github.com/highlightjs/highlight.js) detect the programming language for you - `<annotative-code-common />` supports the [most common ~36 programming languages](https://unpkg.com/highlight.js/lib/common.js)
+- 🧐 Larger bundle size of importing `'highlight.js/lib/common'` which is ~147.7k (gzipped: 45.5k) - according to [Import Cost](https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost)
+
+##### `<annotative-code-full />`
+
+- 😄 Let [highlight.js](https://github.com/highlightjs/highlight.js) detect the programming language for you - `<annotative-code-full />` supports all [190+ programming languages](https://github.com/highlightjs/highlight.js/tree/main/src/languages) of highlight.js
+- 🧐 Much larger bundle size of importing the entire `'highlight.js'` which is ~932.6k (gzipped: 295.4k) - according to [Import Cost](https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost)

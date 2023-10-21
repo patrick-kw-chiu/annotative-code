@@ -1,0 +1,15 @@
+export const style = {
+  fontSize: '.9rem',
+  border: '1px solid rgba(120, 120, 120, 0.3)',
+  backgroundColor: 'rgba(120, 120, 120, 0.1)',
+};
+
+- `annotation` is the config object that specifies what to be and how to annotated
+  - the object key(s) is used to match for the placeholder enclosed with \_\_\_\_ (4 underscore)
+  - the object value(s) contains detail of how to annotate
+    - perhaps to provide further explaination ([`description`](#))
+    - or perhaps to let users play around with that field (built-in [`type`](#) and additional [`knob`](#))
+    - you can also specify predefined values to be selected ([`options`](#)) ...and more!
+  - In the following example, we define an `annotation` that
+    - match for <code style={style}>\_\_\_\_{props.placeholder}\_\_\_\_</code> inside `content`
+    - replace it with annotation popup that let users play around with the available options <code style={style}>{props.options}</code>

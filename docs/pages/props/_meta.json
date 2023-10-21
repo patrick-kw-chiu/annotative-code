@@ -1,0 +1,10 @@
+{
+  "languageFn": "* languageFn",
+  "themeCss": "* themeCss",
+  "content": "* content",
+  "annotation": "* annotation",
+  "onValueChange": "onValueChange",
+  "styleMap": "styleMap",
+  "encloser": "encloser",
+  "annotationMask": "annotationMask"
+}

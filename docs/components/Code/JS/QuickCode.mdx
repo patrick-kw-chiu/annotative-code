@@ -1,0 +1,45 @@
+```html filename="/index.html" copy
+<body>
+  <!-- 1. Add a 'annotative-code' web component in the html and import main.js -->
+  <annotative-code id="code-block"></annotative-code>
+  <script type="module" src="./main.js"></script>
+</body>
+```
+
+```javascript filename="/main.js" copy
+// 2. Inside main.js,
+// Import 'annotative-code' to make the web component available
+// Only import the language function and theme css in need can reduce the bundle size
+import 'annotative-code';
+import javascript from 'annotative-code/bin/highlight.js/languages/javascript.js';
+import a11yDarkCss from 'annotative-code/bin/highlight.js/css/a11y-dark.js';
+// Also import the `applyProperties` utility
+import { applyProperties } from 'annotative-code/bin/utilities/utilities.js';
+
+// 3. Code/content to be highlighted
+// If you enclose certain text with ____ (4 underscore), it becomes a placeholder.
+// The object key(s) of `annotation` will try to insert an annotation popup to it
+const content = `<Button variant="____variant____">
+  Button
+</Button>`;
+
+// 4. Add annotations to the highlighted code!
+// Object key(s) of `annotation` is used to search for placeholder(s) that is enclosed with ____ (4 underscore)
+// Then insert an annotation popup to the placeholder
+const annotation = {
+  variant: {
+    type: 'string',
+    knob: 'select',
+    options: ['text', 'contained', 'outlined'],
+    value: 'text',
+  },
+};
+
+// 5. Apply the props to the HTML element (with id = 'code-block')
+applyProperties(document.getElementById('code-block'), {
+  languageFn: javascript,
+  themeCss: a11yDarkCss,
+  content,
+  annotation,
+});
+```

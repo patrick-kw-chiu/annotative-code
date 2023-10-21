@@ -1,0 +1,114 @@
+import ExplainImportLangFnAndTheme from '../../../components/Content/ExplainImportLangFnAndTheme.mdx';
+import ExplainContent from '../../../components/Content/ExplainContent.mdx';
+import ExplainAnnotation from '../../../components/Content/ExplainAnnotation.mdx';
+
+Assume you've [installed Annotative Code](/getting-started/installation) already
+
+---
+
+1. Import `annotative-code`, `languageFn` and `theme`
+
+Import `annotative-code` to make the web component available to the `Vue` app.
+
+<ExplainImportLangFnAndTheme />
+
+```vue filename="/components/CodeDemo.vue" copy
+<script setup>
+import 'annotative-code';
+import languageFn from 'annotative-code/bin/highlight.js/languages/javascript';
+import themeCss from 'annotative-code/bin/highlight.js/css/a11y-dark';
+</script>
+```
+
+2. Define the `content` and `annotation`
+
+<ExplainContent placeholder={'severity'} />
+
+```vue filename="/components/CodeDemo.vue" copy
+<script setup>
+// ...those imports
+const content = `<Button
+  label="Button"
+  severity="____severity____">
+/>`;
+</script>
+```
+
+<ExplainAnnotation
+  placeholder={'severity'}
+  options={'"primary", "secondary", "success" ...etc'}
+/>
+
+```vue filename="/components/CodeDemo.vue" copy
+<script setup>
+// ...those imports and content
+const annotation = {
+  severity: {
+    type: 'string',
+    knob: 'select',
+    options: [
+      'primary',
+      'secondary',
+      'success',
+      'info',
+      'warning',
+      'help',
+      'danger',
+    ],
+    value: 'secondary',
+  },
+};
+</script>
+```
+
+3. Add interactivity by declaring the ref and the event handler
+
+```vue filename="/components/CodeDemo.vue" copy
+<script setup>
+// ...those imports, content and annotation
+import { ref } from 'vue';
+const severity = ref('secondary');
+const onValueChange = ({ detail }) => {
+  const { valueObj } = detail;
+  severity.value = valueObj.severity;
+};
+</script>
+```
+
+4.  Pass `languageFn`, `theme`, `content` and `annotation` to `<AnnotativeCode />`
+
+Combine the use of `@valuechange` event listener to add interactivity,
+you can capture the changes and reflect it to the button you demo.
+Here, we demo a `<Button />` from `primevue/button`.
+
+```html filename="/components/CodeDemo.vue" copy
+<script setup>
+import Button from 'primevue/button';
+// ...all of the above
+</script>
+
+<template>
+  <div>
+    <Button label="Button" :severity="severity" />
+    <hr />
+    <annotative-code
+      :content="content"
+      :annotation="annotation"
+      :languageFn="languageFn"
+      :themeCss="themeCss"
+      @valuechange="onValueChange"
+    />
+  </div>
+</template>
+```
+
+will become...
+
+<br />
+
+<div style={{ width: '100%' }}>
+  <iframe
+    src="https://stackblitz.com/edit/vitejs-vite-pumwee?embed=1&file=src%2Fcomponents%2FHelloWorld.vue&view=preview"
+    style={{ width: '100%', minHeight: '240px' }}
+  />
+</div>

@@ -1,0 +1,10 @@
+export const style = {
+  fontSize: '.9rem',
+  border: '1px solid rgba(120, 120, 120, 0.3)',
+  backgroundColor: 'rgba(120, 120, 120, 0.1)',
+};
+
+- `content` is the code/content string we pass to highlight.js
+  - Inside the `content` string, you can enclose certain text with \_\_\_\_ (4 underscore), it will become a placeholder
+  - Annotative Code will insert an annotation popup to placeholders based on the `annotation` object
+  - In the following example, we define a `content` string with a placeholder <code style={style}>\_\_\_\_{props.placeholder}\_\_\_\_</code> inside it. If we also specify <code style={style}>{props.placeholder}</code> inside `annotation`, it will be annotated

@@ -1,0 +1,17 @@
+```bash filename="Terminal" copy
+npm i @lit/react
+```
+
+```js filename="/components/AnnotativeCode.jsx" copy
+import React from 'react';
+import { createComponent } from '@lit/react';
+import { AnnotativeCode as AnnotativeCodeWC } from 'annotative-code';
+
+const AnnotativeCode = createComponent({
+  tagName: 'annotative-code',
+  elementClass: AnnotativeCodeWC,
+  react: React,
+});
+
+export default AnnotativeCode;
+```

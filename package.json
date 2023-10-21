@@ -1,0 +1,55 @@
+{
+  "name": "annotative-code",
+  "version": "0.1.26",
+  "description": "Supercharge your code demo with interactive input knobs",
+  "type": "module",
+  "main": "bin/annotative-code.js",
+  "module": "bin/annotative-code.js",
+  "types": "bin/annotative-code.d.ts",
+  "scripts": {
+    "dev": "vite",
+    "build": "rm -rf ./bin && tsc && cp -r ./src/annotative/highlight.js ./bin",
+    "rollup": "rollup -c",
+    "vite-build": "vite build",
+    "vite-preview": "vite preview"
+  },
+  "dependencies": {
+    "highlight.js": "^11.9.0",
+    "lit": "^3.1.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "esbuild": "^0.19.5",
+    "rollup": "^4.1.4",
+    "rollup-plugin-import-css": "^3.3.5",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5"
+  },
+  "files": [
+    "/bin"
+  ],
+  "keywords": [
+    "annotative-code",
+    "code-block",
+    "code-demo",
+    "knobs",
+    "lit",
+    "web-component",
+    "web-components",
+    "reactjs",
+    "react",
+    "vue",
+    "svelte"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patrick-kw-chiu/annotative-code.git"
+  },
+  "bugs": {
+    "url": "https://github.com/patrick-kw-chiu/annotative-code/issues"
+  },
+  "homepage": "https://github.com/patrick-kw-chiu/annotative-code#readme",
+  "customElements": "custom-elements.json"
+}

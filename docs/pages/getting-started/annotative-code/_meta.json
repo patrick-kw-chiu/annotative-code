@@ -1,0 +1,7 @@
+{
+  "react": "React",
+  "svelte": "Svelte",
+  "vue": "Vue",
+  "lit": "Lit",
+  "vanilla-javascript": "Vanilla JavaScript"
+}

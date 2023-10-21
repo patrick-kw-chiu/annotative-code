@@ -1,0 +1,44 @@
+import { Tabs } from 'nextra/components';
+import AnnotativeCode from '../../Demo/AnnotativeCode.tsx';
+
+import languageFn from 'annotative-code/bin/highlight.js/languages/javascript';
+import themeCssA11yDark from 'annotative-code/bin/highlight.js/css/a11y-dark';
+import themeCssA11yLight from 'annotative-code/bin/highlight.js/css/a11y-light';
+import themeCssGithub from 'annotative-code/bin/highlight.js/css/github';
+import themeCssGoogleCode from 'annotative-code/bin/highlight.js/css/googlecode';
+
+CSS string containing styling of the highlighted class e.g. `.hljs-string` and `.hljs-number`. [Themes](https://github.com/highlightjs/highlight.js/tree/main/src/styles) examples: `a11y-dark`, `a11y-light`, `github`, `googlecode` and more.
+
+export const content = `const name = 'Patrick';
+console.log({ name });`;
+
+<Tabs items={['a11y-dark', 'a11y-light', 'github', 'googlecode']}>
+  <Tabs.Tab>
+    <AnnotativeCode
+      languageFn={languageFn}
+      themeCss={themeCssA11yDark}
+      content={content}
+    />
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <AnnotativeCode
+      languageFn={languageFn}
+      themeCss={themeCssA11yLight}
+      content={content}
+    />
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <AnnotativeCode
+      languageFn={languageFn}
+      themeCss={themeCssGithub}
+      content={content}
+    />
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <AnnotativeCode
+      languageFn={languageFn}
+      themeCss={themeCssGoogleCode}
+      content={content}
+    />
+  </Tabs.Tab>
+</Tabs>

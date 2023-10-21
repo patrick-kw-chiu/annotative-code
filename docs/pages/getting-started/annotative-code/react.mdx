@@ -1,0 +1,68 @@
+import { Callout } from 'nextra/components';
+import ReactBridgeComponent from '../../../components/Code/React/ReactBridgeComponent.mdx';
+import ImportLangFnAndTheme from '../../../components/Code/React/ImportLangFnAndTheme.mdx';
+import ExplainContent from '../../../components/Content/ExplainContent.mdx';
+import ExplainAnnotation from '../../../components/Content/ExplainAnnotation.mdx';
+import ReactCode from '../../../components/Code/React/ReactCode.mdx';
+import Demo from '../../../components/Demo/DemoWithButton.tsx';
+
+Assume you've [installed Annotative Code](/getting-started/installation) already
+
+1. Install `@lit/react` and create a bridge React component
+
+<Callout type="info" emoji="ℹ️">
+  Using web components in React is [not
+  mature](https://custom-elements-everywhere.com/) yet. We need to create a
+  bridge React component with `@lit/react`.
+</Callout>
+
+<ReactBridgeComponent />
+
+2. Import the `languageFn` and `theme`
+
+<ImportLangFnAndTheme />
+
+3. Define the `content` and `annotation`
+
+<ExplainContent placeholder={'variant'} />
+
+```js
+const content = `<Button variant="____variant____">
+  Button
+</Button>`;
+```
+
+<ExplainAnnotation
+  placeholder={'variant'}
+  options={'"text", "contained", "outlined"'}
+/>
+
+```js
+const annotation = {
+  variant: {
+    type: 'string',
+    knob: 'select',
+    options: ['text', 'contained', 'outlined'],
+    value: variant,
+  },
+};
+```
+
+4. Pass `languageFn`, `theme`, `content` and `annotation` to `<AnnotativeCode />`
+
+Together with the use of `onChange` and `useState` to add interactivity,
+you can capture the changes and reflect it to the button you demo.
+Here, we demo a `<Button />` from `@mui/material/Button`.
+
+<ReactCode />
+
+will become...
+
+<br />
+<Demo />
+
+<Callout type="info" emoji="ℹ️">
+  What's next? View a React online example on **Stackblitz**
+  [here](https://stackblitz.com/edit/vitejs-vite-qczupp?file=src%2FAnnotativeCode.tsx,src%2FCodeDemo.tsx&terminal=dev)
+  or see how it works in other frameworks
+</Callout>

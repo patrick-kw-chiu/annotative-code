@@ -1,0 +1,38 @@
+```js filename="/components/CodeDemo.jsx" copy
+// 1. Because using web components in React is not mature yet
+// We need to create a bridge React component <AnnotativeCode /> with `@lit/react`
+// In here, we assume we have done so.
+// See more in "Getting Started > annotative-code > React"
+import AnnotativeCode from './AnnotativeCode';
+
+// 2. Only import the language function and theme css in need can reduce the bundle size
+import languageFn from 'annotative-code/bin/highlight.js/languages/javascript';
+import themeCss from 'annotative-code/bin/highlight.js/css/a11y-dark';
+
+// 3. Code/content to be highlighted
+// If you enclose certain text with ____ (4 underscore), it becomes a placeholder.
+// The object key(s) of `annotation` will try to insert an annotation popup to it
+const content = `<Button variant="____variant____">
+  Button
+</Button>`;
+
+// 4. Add annotations to the highlighted code!
+// Object key(s) of `annotation` is used to search for placeholder(s) that is enclosed with ____ (4 underscore)
+// Then insert an annotation popup to the placeholder
+const annotation = {
+  variant: {
+    type: 'string',
+    knob: 'select',
+    options: ['text', 'contained', 'outlined'],
+    value: 'text',
+  },
+};
+
+// 5. Pass all the 4 props
+<AnnotativeCode
+  themeCss={themeCss}
+  languageFn={languageFn}
+  content={content}
+  annotation={annotation}
+/>;
+```

@@ -1,0 +1,105 @@
+import ExplainImportLangFnAndTheme from '../../../components/Content/ExplainImportLangFnAndTheme.mdx';
+import ExplainContent from '../../../components/Content/ExplainContent.mdx';
+import ExplainAnnotation from '../../../components/Content/ExplainAnnotation.mdx';
+
+Assume you've [installed Annotative Code](/getting-started/installation) already
+
+---
+
+1. Add a `annotative-code` web component in the html and import `main.js`
+
+```html filename="/index.html" copy
+<body>
+  <annotative-code id="code-block"></annotative-code>
+  <script type="module" src="./main.js"></script>
+</body>
+```
+
+2. Import `annotative-code`, `languageFn` and `theme`
+
+First, import `annotative-code` which will `customElements.define()` a web component and make it available.
+And import `applyProperties` which is a helper function to, well, apply the props to the web component.
+
+<ExplainImportLangFnAndTheme />
+
+```javascript filename="/main.js" copy
+import 'annotative-code';
+import { applyProperties } from 'annotative-code/bin/utilities/utilities.js';
+import javascript from 'annotative-code/bin/highlight.js/languages/javascript.js';
+import a11yDarkCss from 'annotative-code/bin/highlight.js/css/a11y-dark.js';
+```
+
+2. Define the `content` and `annotation`
+
+<ExplainContent placeholder={'variant'} />
+
+```javascript filename="/main.js" copy
+// ...those imports
+const content = `<button type="button" class="btn ____variant____">
+  Button
+</button>`;
+```
+
+<ExplainAnnotation
+  placeholder={'variant'}
+  options={'"btn-primary", "btn-secondary", "btn-success" ...etc'}
+/>
+
+```javascript filename="/main.js" copy
+// ...those imports and content
+const annotation = {
+  variant: {
+    type: 'string',
+    knob: 'select',
+    options: [
+      'btn-primary',
+      'btn-secondary',
+      'btn-success',
+      'btn-danger',
+      'btn-warning',
+      'btn-info',
+      'btn-light',
+      'btn-dark',
+      'btn-link',
+    ],
+    value: 'btn-primary',
+  },
+};
+```
+
+3. Add interactivity by declaring the `onValueChange` event handler
+
+```javascript filename="/main.js" copy
+// ...those imports, content and annotation
+const onValueChange = ({ detail }) => {
+  const { updatedKey, valueObj } = detail;
+  document.getElementById('button').className = `btn ${valueObj[updatedKey]}`;
+};
+```
+
+4.  Pass `languageFn`, `theme`, `content` and `annotation` to `<AnnotativeCode />`
+
+Passing all the above props. You can then capture the changes and reflect it to the button you demo.
+Here, we demo a `<button />` from `bootstrap`. (You may need to add `<link href='bootstrap.min.css' />` and `<script src="bootstrap.bundle.min.js"></script>` in the html)
+
+```javascript filename="/main.js" copy
+// ...all of the above
+applyProperties(document.getElementById('block-1'), {
+  languageFn: javascript,
+  themeCss: a11yDarkCss,
+  content,
+  annotation,
+  onValueChange,
+});
+```
+
+will become...
+
+<br />
+
+<div style={{ width: '100%' }}>
+  <iframe
+    src="https://stackblitz.com/edit/vitejs-vite-rk6m3n?embed=1&file=src%2FApp.javascript&view=preview"
+    style={{ width: '100%', minHeight: '240px' }}
+  />
+</div>

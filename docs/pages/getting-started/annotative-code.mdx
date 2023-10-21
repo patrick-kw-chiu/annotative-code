@@ -1,0 +1,107 @@
+import { Tabs, Callout, Cards, Card } from 'nextra/components';
+import {
+  MdInstallDesktop,
+  MdOutlineIntegrationInstructions,
+  MdOutlineDashboardCustomize,
+  MdCode,
+} from 'react-icons/md';
+import {
+  TbBrandReact,
+  TbBrandSvelte,
+  TbBrandVue,
+  TbBrandJavascript,
+  TbBrandTypescript,
+} from 'react-icons/tb';
+import { SiAstro } from 'react-icons/si';
+
+import WarnNotReactTooltip from '../../components/Tooltip/WarnNotReactTooltip.tsx';
+
+import ReactQuickDemo from '../../components/Demo/QuickDemo.tsx';
+
+import ReactQuickCode from '../../components/Code/React/QuickCode.mdx';
+import SvelteQuickCode from '../../components/Code/Svelte/QuickCode.mdx';
+import VueQuickCode from '../../components/Code/Vue/QuickCode.mdx';
+import JSQuickCode from '../../components/Code/JS/QuickCode.mdx';
+
+To use `<annotative-code />`, you need to pass 4 props - `languageFn`, `themeCss`, `content` and `annotation`.
+
+- `languageFn` - [language functions](https://github.com/highlightjs/highlight.js/tree/main/src/languages) to highlight your content
+- `themeCss` - [themes](https://github.com/highlightjs/highlight.js/tree/main/src/styles) e.g. Andriod Studio, Github, Obsidian and more
+- `content` - **code** or content to be highlighted
+- `annotation` - JSON object to specify what to annotate inside `content`
+
+Below is a quick example, It sets up a placeholder called `____variant____` inside the
+`content` string. Then, in `annotation`, it specifies that `variant` expects
+either `'raised'`, `'unelevated'` or `'outlined'`.
+
+If you want to see a more **comprehensive version**, head out to
+[React](/getting-started/annotative-code/react),
+[Svelte](/getting-started/annotative-code/svelte),
+[Vue](/getting-started/annotative-code/vue),
+[Lit](/getting-started/annotative-code/lit), or
+[Vanilla JS](/getting-started/annotative-code/vanilla-javascript).
+{/* [TS](/getting-started/annotative-code/vanilla-typescript) */}
+{/* [Astro](/getting-started/annotative-code/astro) */}
+
+<Tabs items={['React', 'Svelte', 'Vue', 'Lit', 'Vanilla JS']}>
+  <Tabs.Tab>
+    <ReactQuickCode />
+    And we have a playable code block!
+    <br />
+    <ReactQuickDemo />
+    <Callout type="info" emoji="ℹ️">
+      What's next? See a more **comprehensive** React example
+      [here](/getting-started/annotative-code/react) or an online version on
+      **Stackblitz**
+      [here](https://stackblitz.com/edit/vitejs-vite-qczupp?file=src%2FAnnotativeCode.tsx,src%2FCodeDemo.tsx&terminal=dev)
+    </Callout>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <SvelteQuickCode />
+    <div>
+      <span>And we have a playable code block!</span>
+      <WarnNotReactTooltip />
+    </div>
+    <br />
+    <ReactQuickDemo />
+    <Callout type="info" emoji="ℹ️">
+      What's next? See a more **comprehensive** Svelte example
+      [here](/getting-started/annotative-code/svelte) or an online version on
+      **Stackblitz**
+      [here](https://stackblitz.com/edit/vitejs-vite-rqlzes?file=package.json,src%2FApp.svelte&terminal=dev)
+    </Callout>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <VueQuickCode />
+    <div>
+      <span>And we have a playable code block!</span>
+      <WarnNotReactTooltip />
+    </div>
+    <br />
+    <ReactQuickDemo />
+    <Callout type="info" emoji="ℹ️">
+      What's next? See a more **comprehensive** Vue example
+      [here](/getting-started/annotative-code/vue) or an online version on
+      **Stackblitz**
+      [here](https://stackblitz.com/edit/vitejs-vite-xijn5h?file=src%2Fcomponents%2FHelloWorld.vue&terminal=dev)
+    </Callout>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <p>Coming coon!</p>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <JSQuickCode />
+    <div>
+      <span>And we have a playable code block!</span>
+      <WarnNotReactTooltip />
+    </div>
+    <br />
+    <ReactQuickDemo />
+    <Callout type="info" emoji="ℹ️">
+      What's next? See a more **comprehensive** Vanilla JS example
+      [here](/getting-started/annotative-code/vanilla-javascript) or an online
+      version on **Stackblitz**
+      [here](https://stackblitz.com/edit/vitejs-vite-nzhtqa?file=index.html,main.js&terminal=dev)
+    </Callout>
+  </Tabs.Tab>
+</Tabs>

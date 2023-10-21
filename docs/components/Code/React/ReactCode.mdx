@@ -1,0 +1,38 @@
+```js filename="/components/CodeDemo.jsx" copy
+import { useState } from 'react';
+import Button from '@mui/material/Button';
+// ...other import from step 2
+
+const CodeDemo = () => {
+  const [variant, setVariant] = useState('text');
+
+  const content = `<Button variant="____variant____">
+  Button
+</Button>`;
+
+  const annotation = {
+    variant: {
+      type: 'string',
+      knob: 'select',
+      options: ['text', 'contained', 'outlined'],
+      value: variant,
+    },
+  };
+
+  return (
+    <div>
+      <Button variant={variant}>Button</Button>
+      <hr />
+      <AnnotativeCode
+        themeCss={themeCss}
+        languageFn={languageFn}
+        content={content}
+        annotation={annotation}
+        onChange={(event) => {
+          setVariant(event.detail.valueObj.variant);
+        }}
+      />
+    </div>
+  );
+};
+```

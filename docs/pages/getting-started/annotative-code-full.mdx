@@ -1,0 +1,79 @@
+The usage of `<annotative-code-full />` is nearly identical to `<annotative-code />`,
+except you only need to pass 3 props `themeCss`, `content` and `annotation`. (Doesn't need `languageFn`)
+
+`languageFn` isn't needed because `highlight.js` detects the programming language for you -
+<annotative-code-full /> supports all [190+ programming languages](https://github.com/highlightjs/highlight.js/tree/main/src/languages) of highlight.js.
+However, it comes with a cost that the bundle size is larger, which is ~932.6k (gzipped: 295.4k) - according to [Import Cost](https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost)
+
+Here's a quick vanilla JavaScript example. See more detailed examples of usage in different frameworks in [annotative-code](/getting-started/annotative-code).
+
+```html filename="/index.html" copy
+<body>
+  <!-- 1. Add a 'annotative-code-full' web component in the html and import main.js -->
+  <annotative-code-full id="code-block"></annotative-code-full>
+  <script type="module" src="./main.js"></script>
+</body>
+```
+
+```javascript
+// 2. Inside main.js,
+// Import 'annotative-code-full' to make the web component available
+// Import the theme css in need
+import 'annotative-code/bin/annotative-code-full';
+import a11yDarkCss from 'annotative-code/bin/highlight.js/css/a11y-dark.js';
+// Also import the `applyProperties` utility
+import { applyProperties } from 'annotative-code/bin/utilities/utilities.js';
+
+// 3. Code/content to be highlighted
+// If you enclose certain text with ____ (4 underscore), it becomes a placeholder.
+// The object key(s) of `annotation` will try to insert an annotation popup to it
+const content = `<button type="button" class="btn ____variant____">
+  Button
+</button>`;
+
+// 4. Add annotations to the highlighted code!
+// Object key(s) of `annotation` is used to search for placeholder(s) that is enclosed with ____ (4 underscore)
+// Then insert an annotation popup to the placeholder
+const annotation = {
+  variant: {
+    type: 'string',
+    knob: 'select',
+    options: [
+      'btn-primary',
+      'btn-secondary',
+      'btn-success',
+      'btn-danger',
+      'btn-warning',
+      'btn-info',
+      'btn-light',
+      'btn-dark',
+      'btn-link',
+    ],
+    value: 'btn-primary',
+  },
+};
+
+const onValueChange = ({ detail }) => {
+  const { updatedKey, valueObj } = detail;
+  document.getElementById('button').className = `btn ${valueObj[updatedKey]}`;
+};
+
+// 5. Apply the props to the HTML element (with id = 'code-block')
+applyProperties(document.getElementById('code-block'), {
+  themeCss: a11yDarkCss,
+  content,
+  annotation,
+  onValueChange,
+});
+```
+
+will become...
+
+<br />
+
+<div style={{ width: '100%' }}>
+  <iframe
+    src="https://stackblitz.com/edit/vitejs-vite-vg5zbu?embed=1&file=main.js&view=preview"
+    style={{ width: '100%', minHeight: '240px' }}
+  />
+</div>
