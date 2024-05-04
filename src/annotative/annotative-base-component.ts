@@ -57,7 +57,7 @@ export class AnnotativeBaseComponent extends LitElement {
         right: 0;
         padding: 4px 6px;
         cursor: pointer;
-        z-index: 200;
+        z-index: 20;
       }
 
       #copy-button:hover {
@@ -378,7 +378,7 @@ export class AnnotativeBaseComponent extends LitElement {
       backgroundColor: popupStyle.backgroundColor,
       borderColor: popupStyle.borderColor,
       color: popupStyle.textColor,
-      'z-index': 300,
+      'z-index': 30,
     };
 
     return html`

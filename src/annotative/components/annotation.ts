@@ -40,7 +40,7 @@ export class AnnotativeAnnotation extends LitElement {
         vertical-align: top;
         white-space: initial;
         cursor: pointer;
-        z-index: 100;
+        z-index: 20;
         overflow: visible;
       }
       #annotation {
@@ -135,7 +135,7 @@ export class AnnotativeAnnotation extends LitElement {
       this._showPopup = false;
 
       (annotationElement.value.offsetParent as HTMLElement).style.zIndex =
-        '100';
+        '10';
       return;
     }
 
@@ -144,7 +144,7 @@ export class AnnotativeAnnotation extends LitElement {
     this._showPopup = true;
     this._popupStyle = style;
 
-    (annotationElement.value.offsetParent as HTMLElement).style.zIndex = '110';
+    (annotationElement.value.offsetParent as HTMLElement).style.zIndex = '11';
   }
 
   override render() {
