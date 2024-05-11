@@ -34,7 +34,11 @@ const config: DocsThemeConfig = {
   docsRepositoryBase:
     'https://github.com/patrick-kw-chiu/annotative-code/tree/main/docs',
   footer: {
-    text: 'Nextra Docs Template',
+    text: (
+      <span>
+        Annotative Code | Built with ❤️ by <a href="/">Patrick Chiu</a>
+      </span>
+    ),
   },
 };
 
