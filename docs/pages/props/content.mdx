@@ -1,0 +1,92 @@
+import { Tabs } from 'nextra/components';
+import AnnotativeCode from '../../components/Demo/AnnotativeCode.tsx';
+
+import javaScriptFn from 'annotative-code/bin/highlight.js/languages/javascript';
+import typeScriptFn from 'annotative-code/bin/highlight.js/languages/typescript';
+import themeCss from 'annotative-code/bin/highlight.js/css/a11y-dark';
+
+Content (code) to be highlighted and annotated.
+The code can be any of these supported [programming languages](https://github.com/highlightjs/highlight.js/tree/main/src/languages)
+and even normal [plaintext](https://github.com/highlightjs/highlight.js/blob/main/src/languages/plaintext.js).
+Below are some examples of a few programming languages.
+
+export const content = `import languageFn from 'annotative-code/bin/highlight.js/languages/typescript';
+
+const content = \`{{content}}\`
+
+<annotative-code languageFn={languageFn} content={content} />`;
+
+export const typeScriptContent = `interface Person {
+  name: string;
+  age: number;
+}
+
+const greet = (person: Person) => "Hello " + person.name`;
+
+export const arrowStyle = { textAlign: 'center', padding: '12px' };
+export const styleMap = { padding: '8px' };
+
+<hr style={{ margin: '24px 0' }} />
+
+<Tabs items={['TypeScript', 'HTML (XML)', 'Python', 'Rust']}>
+  <Tabs.Tab>
+    <AnnotativeCode
+      languageFn={javaScriptFn}
+      themeCss={themeCss}
+      content={content.replace('{{content}}', typeScriptContent)}
+      styleMap={styleMap}
+    />
+    <div style={arrowStyle}>⬇️⬇️⬇️</div>
+    <AnnotativeCode
+      languageFn={typeScriptFn}
+      themeCss={themeCss}
+      content={typeScriptContent}
+      styleMap={styleMap}
+    />
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <AnnotativeCode
+      languageFn={javaScriptFn}
+      themeCss={themeCss}
+      content={content.replace('{{content}}', typeScriptContent)}
+      styleMap={styleMap}
+    />
+    <div style={arrowStyle}>⬇️⬇️⬇️</div>
+    <AnnotativeCode
+      languageFn={typeScriptFn}
+      themeCss={themeCss}
+      content={typeScriptContent}
+      styleMap={styleMap}
+    />
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <AnnotativeCode
+      languageFn={javaScriptFn}
+      themeCss={themeCss}
+      content={content.replace('{{content}}', typeScriptContent)}
+      styleMap={styleMap}
+    />
+    <div style={arrowStyle}>⬇️⬇️⬇️</div>
+    <AnnotativeCode
+      languageFn={typeScriptFn}
+      themeCss={themeCss}
+      content={typeScriptContent}
+      styleMap={styleMap}
+    />
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <AnnotativeCode
+      languageFn={javaScriptFn}
+      themeCss={themeCss}
+      content={content.replace('{{content}}', typeScriptContent)}
+      styleMap={styleMap}
+    />
+    <div style={arrowStyle}>⬇️⬇️⬇️</div>
+    <AnnotativeCode
+      languageFn={typeScriptFn}
+      themeCss={themeCss}
+      content={typeScriptContent}
+      styleMap={styleMap}
+    />
+  </Tabs.Tab>
+</Tabs>

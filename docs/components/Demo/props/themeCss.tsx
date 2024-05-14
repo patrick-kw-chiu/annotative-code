@@ -22,7 +22,7 @@ import themeCss from 'annotative-code/bin/highlight.js/css/____theme____';
 import 'annotative-code';
 `;
 
-  const wc2 = `<annotative-code themeCss={themeCss} />;`;
+  const wc2 = `<annotative-code themeCss={themeCss} />`;
 
   const react1 = `// Using React.js with the bridge component
 // See more in "Getting Started > annotative-code > React"
@@ -31,7 +31,7 @@ import themeCss from 'annotative-code/bin/highlight.js/css/____theme____';
 import AnnotativeCode from './AnnotativeCode';
 `;
 
-  const react2 = `<AnnotativeCode languageFn={languageFn} />;  `;
+  const react2 = `<AnnotativeCode languageFn={languageFn} />  `;
 
   const [theme, setTheme] = useState('a11y-dark');
 

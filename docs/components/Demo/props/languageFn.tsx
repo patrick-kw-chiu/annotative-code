@@ -12,7 +12,7 @@ import languageFn from 'annotative-code/bin/highlight.js/languages/____language_
 import 'annotative-code';
 `;
 
-  const wc2 = `<annotative-code languageFn={languageFn} />;`;
+  const wc2 = `<annotative-code languageFn={languageFn} />`;
 
   const react1 = `// Using React.js with the bridge component
 // See more in "Getting Started > annotative-code > React"
@@ -21,7 +21,7 @@ import languageFn from 'annotative-code/bin/highlight.js/languages/____language_
 import AnnotativeCode from './AnnotativeCode';
 `;
 
-  const react2 = `<AnnotativeCode languageFn={languageFn} />;  `;
+  const react2 = `<AnnotativeCode languageFn={languageFn} />  `;
 
   const annotation = {
     language: {
