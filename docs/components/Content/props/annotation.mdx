@@ -1,0 +1,54 @@
+import { Tabs } from 'nextra/components';
+import AnnotativeCode from '../../Demo/AnnotativeCode.tsx';
+
+import languageFn from 'annotative-code/bin/highlight.js/languages/javascript';
+import themeCss from 'annotative-code/bin/highlight.js/css/a11y-dark';
+
+JSON object to specify what to annotate inside `content`.
+The `key`(s) will be used to search for placeholder and the value object contains the configuration.
+
+export const annotation = {
+  projectName: {
+    type: 'string',
+    value: 'annotative-code'
+  }
+}
+
+export const content = `import languageFn from 'annotative-code/bin/highlight.js/languages/javascript';
+
+const annotation = {{annotation}}
+
+const content = \`{{content}}\`
+
+<annotative-code languageFn={languageFn} content={content} />`;
+
+export const javaScriptContent = `const projectName = '\_\_\_\_projectName\_\_\_\_';
+console.log({ projectName })`;
+
+export const styleMap = { padding: '8px' };
+
+**Example:**<br />
+
+<AnnotativeCode
+  languageFn={languageFn}
+  themeCss={themeCss}
+  content={content
+    .replace('{{annotation}}', JSON.stringify(annotation, null, 2))
+    .replace('{{content}}', javaScriptContent)}
+  styleMap={styleMap}
+/>
+<div
+  style={{
+    textAlign: 'center',
+    padding: '12px',
+  }}
+>
+  ⬇️⬇️⬇️
+</div>
+<AnnotativeCode
+  languageFn={languageFn}
+  themeCss={themeCss}
+  content={javaScriptContent}
+  annotation={annotation}
+  styleMap={styleMap}
+/>

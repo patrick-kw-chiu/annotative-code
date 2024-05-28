@@ -3,6 +3,9 @@ import AnnotativeCode from '../../components/Demo/AnnotativeCode.tsx';
 
 import javaScriptFn from 'annotative-code/bin/highlight.js/languages/javascript';
 import typeScriptFn from 'annotative-code/bin/highlight.js/languages/typescript';
+import xmlFn from 'annotative-code/bin/highlight.js/languages/xml';
+import pythonFn from 'annotative-code/bin/highlight.js/languages/python';
+import rustFn from 'annotative-code/bin/highlight.js/languages/rust';
 import themeCss from 'annotative-code/bin/highlight.js/css/a11y-dark';
 
 Content (code) to be highlighted and annotated.
@@ -22,6 +25,52 @@ export const typeScriptContent = `interface Person {
 }
 
 const greet = (person: Person) => "Hello " + person.name`;
+
+export const htmlContent = `<Box>
+  <button style="background-color: blue;">
+    Click Me!
+  </button>
+</Box>`;
+
+export const pythonContent = `# Python Program to calculate the square root
+
+# Note: change this value for a different result
+
+num = 8
+
+# To take the input from the user
+
+#num = float(input('Enter a number: '))
+
+num_sqrt = num \*\* 0.5
+print('The square root of %0.3f is %0.3f'%(num ,num_sqrt))`
+
+export const rustContent = `fn main() {
+    // Variables can be type annotated.
+    let logical: bool = true;
+
+    let a_float: f64 = 1.0;  // Regular annotation
+    let an_integer   = 5i32; // Suffix annotation
+
+    // Or a default will be used.
+    let default_float   = 3.0; // f64
+    let default_integer = 7;   // i32
+
+    // A type can also be inferred from context.
+    let mut inferred_type = 12; // Type i64 is inferred from another line.
+    inferred_type = 4294967296i64;
+
+    // A mutable variable's value can be changed.
+    let mut mutable = 12; // Mutable i32
+    mutable = 21;
+
+    // Error! The type of a variable can't be changed.
+    mutable = true;
+
+    // Variables can be overwritten with shadowing.
+    let mutable = true;
+
+}`;
 
 export const arrowStyle = { textAlign: 'center', padding: '12px' };
 export const styleMap = { padding: '8px' };
@@ -48,14 +97,16 @@ export const styleMap = { padding: '8px' };
     <AnnotativeCode
       languageFn={javaScriptFn}
       themeCss={themeCss}
-      content={content.replace('{{content}}', typeScriptContent)}
+      content={content
+        .replace('{{content}}', htmlContent)
+        .replace('languages/typescript', 'languages/xml')}
       styleMap={styleMap}
     />
     <div style={arrowStyle}>⬇️⬇️⬇️</div>
     <AnnotativeCode
-      languageFn={typeScriptFn}
+      languageFn={xmlFn}
       themeCss={themeCss}
-      content={typeScriptContent}
+      content={htmlContent}
       styleMap={styleMap}
     />
   </Tabs.Tab>
@@ -63,14 +114,16 @@ export const styleMap = { padding: '8px' };
     <AnnotativeCode
       languageFn={javaScriptFn}
       themeCss={themeCss}
-      content={content.replace('{{content}}', typeScriptContent)}
+      content={content
+        .replace('{{content}}', pythonContent)
+        .replace('languages/typescript', 'languages/python')}
       styleMap={styleMap}
     />
     <div style={arrowStyle}>⬇️⬇️⬇️</div>
     <AnnotativeCode
-      languageFn={typeScriptFn}
+      languageFn={pythonFn}
       themeCss={themeCss}
-      content={typeScriptContent}
+      content={pythonContent}
       styleMap={styleMap}
     />
   </Tabs.Tab>
@@ -78,14 +131,16 @@ export const styleMap = { padding: '8px' };
     <AnnotativeCode
       languageFn={javaScriptFn}
       themeCss={themeCss}
-      content={content.replace('{{content}}', typeScriptContent)}
+      content={content
+        .replace('{{content}}', rustContent)
+        .replace('languages/typescript', 'languages/rust')}
       styleMap={styleMap}
     />
     <div style={arrowStyle}>⬇️⬇️⬇️</div>
     <AnnotativeCode
-      languageFn={typeScriptFn}
+      languageFn={rustFn}
       themeCss={themeCss}
-      content={typeScriptContent}
+      content={rustContent}
       styleMap={styleMap}
     />
   </Tabs.Tab>
