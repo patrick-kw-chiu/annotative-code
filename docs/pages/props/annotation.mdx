@@ -22,12 +22,17 @@ const content = \`{{content}}\`
 
 const annotation = {{annotation}}
 
-<annotative-code languageFn={languageFn} content={content} />`;
+<annotative-code
+  languageFn={languageFn}
+  content={content}
+  annotation={annotation}
+/>`;
 
 export const javaScriptContent = `const projectName = '\_\_\_\_projectName\_\_\_\_';
 console.log({ projectName })`;
 
 export const styleMap = { padding: '8px' };
+export const innerAccordionStyle = { paddingBottom: 0, fontSize: '1rem' };
 
 <Accordion label={'Quick Example:'}>
   <AnnotativeCode
@@ -50,21 +55,26 @@ export const styleMap = { padding: '8px' };
 
 ### Config Options
 
-| Option            | Type   | Default Value | Description                                                                                                           |
-| ----------------- | ------ | ------------- | --------------------------------------------------------------------------------------------------------------------- |
-| [\*type](#type)   | string | `'string'`    | `type` defines <br />- Styling of the annotation (powered by highlight.js)<br />- Input knob if `knob` is not defined |
-| [\*value](#value) | string | n/a           | 321                                                                                                                   |
+| Option          | Type   | Default Value | Description                                                                                                           |
+| --------------- | ------ | ------------- | --------------------------------------------------------------------------------------------------------------------- |
+| [\*type](#type) | string | `"string"`    | `type` defines <br />- Styling of the annotation (powered by highlight.js)<br />- Input knob if `knob` is not defined |
+| \*value         | any    | n/a           | The default value passed to the annotation placeholder and the input knob                                             |
+| [\*knob](#knob) | string | `"string"`    | `knob` defines the input knob e.g. `select`, `date` and `color`                                                       |
 
 #### type
 
 `type` defines
 
 - Styling of the annotation. This part is powered by highlight.js' CSS themes
-- Input type if `knob` is not defined. The following `type`s include a default input knob. The other `type`s would use a `string` input knob, if not further defined
-  - `'string'`
-  - `'boolean'`
-  - `'number'`
-  - `'integer'`
+- Input type if `knob` is not defined.
+  - The following `type`s include a default input knob
+    - `string`
+    - `boolean`
+    - `number`
+      - Optional: `min` and `max`
+    - `integer`
+      - Optional: `min` and `max`
+  - The other `type`s would use a `string` input knob, if `knob` is not defined
 
 Available options are mirrored from highlight.js' CSS class, which could be found [here](https://github.com/patrick-kw-chiu/annotative-code/blob/main/src/annotative/types/types.ts#L27-L60).
 
@@ -101,7 +111,7 @@ export const typeAnnotation = {
     styleMap={styleMap}
   />
   <br />
-  <Accordion label={'Source Code:'}>
+  <Accordion label={'Source Code:'} style={innerAccordionStyle}>
     <AnnotativeCode
       languageFn={languageFn}
       themeCss={themeCss}
@@ -113,4 +123,72 @@ export const typeAnnotation = {
   </Accordion>
 </Accordion>
 
-#### value
+#### knob
+
+`knob` defines custom input knob other than the basic
+`string`, `boolean`, `number` and `integer` types.
+Some `knob` needs to supplement other options e.g.
+for `knob: 'select'`, you also need to pass the available `options`.
+
+- `select`
+  - Required: `options`
+- `date`
+  - Optional: `min` and `max`
+- `time`
+- `datetime-local`
+  - Optional: `min` and `max`
+- `range`
+  - Required: `min` and `max`
+- `color`
+
+export const knobContent = `const fruitSelect = '\_\_\_\_fruitSelect\_\_\_\_';
+const expiryDate = \_\_\_\_expiryDate\_\_\_\_;
+const timeToEat = \_\_\_\_timeToEat\_\_\_\_;
+const dateTimeLocal = \_\_\_\_dateTimeLocal\_\_\_\_;`;
+
+export const knobAnnotation = {
+  fruitSelect: {
+    type: 'string',
+    value: '🍎 apple',
+    knob: 'select',
+    options: ['🍎 apple', '🍊 orange', '🍌 banana'],
+  },
+  expiryDate: {
+    type: 'string',
+    value: '2024-05-30',
+    knob: 'date',
+    min: '2024-05-20',
+  },
+  timeToEat: {
+    type: 'string',
+    value: '10:30',
+    knob: 'time',
+  },
+  dateTimeLocal: {
+    type: 'string',
+    value: '2024-05-30T22:30',
+    knob: 'datetime-local',
+    min: '2024-05-20T01:30',
+  },
+};
+
+<Accordion label={'Quick Example:'} defaultOpened>
+  <AnnotativeCode
+    languageFn={languageFn}
+    themeCss={themeCss}
+    content={knobContent}
+    annotation={knobAnnotation}
+    styleMap={styleMap}
+  />
+  <br />
+  <Accordion label={'Source Code:'} style={innerAccordionStyle}>
+    <AnnotativeCode
+      languageFn={languageFn}
+      themeCss={themeCss}
+      content={content
+        .replace('{{annotation}}', JSON.stringify(knobAnnotation, null, 2))
+        .replace('{{content}}', knobContent)}
+      styleMap={styleMap}
+    />
+  </Accordion>
+</Accordion>

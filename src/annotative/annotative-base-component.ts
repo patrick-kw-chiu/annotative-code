@@ -57,7 +57,7 @@ export class AnnotativeBaseComponent extends LitElement {
         right: 0;
         padding: 4px 6px;
         cursor: pointer;
-        z-index: 20;
+        z-index: 21;
       }
 
       #copy-button:hover {

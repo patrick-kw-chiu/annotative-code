@@ -78,8 +78,8 @@ export interface AnnotationConfig {
     | 'range'
     | 'color';
   // type - number
-  min?: number;
-  max?: number;
+  min?: number | string;
+  max?: number | string;
   // knob - select
   options?: (boolean | string | number)[];
   // knob - textarea

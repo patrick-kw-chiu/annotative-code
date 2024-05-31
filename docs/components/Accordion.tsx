@@ -1,6 +1,11 @@
 import { useState } from 'react';
 
-const Accordion = ({ label = '', children, defaultOpened = false }) => {
+const Accordion = ({
+  label = '',
+  children,
+  defaultOpened = false,
+  style = {},
+}) => {
   const [open, setOpen] = useState(defaultOpened);
 
   return (
@@ -12,7 +17,7 @@ const Accordion = ({ label = '', children, defaultOpened = false }) => {
     >
       <div
         className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-xl"
-        style={{ cursor: 'pointer', paddingBottom: '0.5rem' }}
+        style={{ cursor: 'pointer', paddingBottom: '0.5rem', ...style }}
         onClick={() => setOpen(!open)}
       >
         ► {label}

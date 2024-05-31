@@ -135,7 +135,7 @@ export class AnnotativeAnnotation extends LitElement {
       this._showPopup = false;
 
       (annotationElement.value.offsetParent as HTMLElement).style.zIndex =
-        '10';
+        '20';
       return;
     }
 
@@ -144,7 +144,7 @@ export class AnnotativeAnnotation extends LitElement {
     this._showPopup = true;
     this._popupStyle = style;
 
-    (annotationElement.value.offsetParent as HTMLElement).style.zIndex = '11';
+    (annotationElement.value.offsetParent as HTMLElement).style.zIndex = '22';
   }
 
   override render() {
