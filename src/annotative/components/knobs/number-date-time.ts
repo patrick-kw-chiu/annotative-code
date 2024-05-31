@@ -47,7 +47,7 @@ export class AnnotativeKnobNumberDateTime extends LitElement {
         : ''}
       <input
         class="number"
-        type=${this.type}
+        type=${this.type === 'integer' ? 'number' : this.type}
         style=${styleMap({
           color: this.popupStyle.textColor,
           border: `1px solid ${this.popupStyle.inputBorderColor}`,

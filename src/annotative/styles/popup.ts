@@ -4,7 +4,9 @@ export const popupStyle = css`
   #popup {
     cursor: default;
     position: absolute;
-    width: 0;
+    width: 50vw;
+    max-width: 500px;
+
     height: fit-content;
     opacity: 0;
 
