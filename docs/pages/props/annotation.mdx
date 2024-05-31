@@ -18,9 +18,9 @@ export const annotation = {
 
 export const content = `import languageFn from 'annotative-code/bin/highlight.js/languages/javascript';
 
-const annotation = {{annotation}}
-
 const content = \`{{content}}\`
+
+const annotation = {{annotation}}
 
 <annotative-code languageFn={languageFn} content={content} />`;
 
@@ -38,14 +38,7 @@ export const styleMap = { padding: '8px' };
       .replace('{{content}}', javaScriptContent)}
     styleMap={styleMap}
   />
-  <div
-    style={{
-      textAlign: 'center',
-      padding: '12px',
-    }}
-  >
-    ⬇️⬇️⬇️
-  </div>
+  <div style={{ textAlign: 'center', padding: '12px' }}>⬇️⬇️⬇️</div>
   <AnnotativeCode
     languageFn={languageFn}
     themeCss={themeCss}
@@ -54,3 +47,70 @@ export const styleMap = { padding: '8px' };
     styleMap={styleMap}
   />
 </Accordion>
+
+### Config Options
+
+| Option            | Type   | Default Value | Description                                                                                                           |
+| ----------------- | ------ | ------------- | --------------------------------------------------------------------------------------------------------------------- |
+| [\*type](#type)   | string | `'string'`    | `type` defines <br />- Styling of the annotation (powered by highlight.js)<br />- Input knob if `knob` is not defined |
+| [\*value](#value) | string | n/a           | 321                                                                                                                   |
+
+#### type
+
+`type` defines
+
+- Styling of the annotation. This part is powered by highlight.js' CSS themes
+- Input type if `knob` is not defined. The following `type`s include a default input knob. The other `type`s would use a `string` input knob, if not further defined
+  - `'string'`
+  - `'boolean'`
+  - `'number'`
+  - `'integer'`
+
+Available options are mirrored from highlight.js' CSS class, which could be found [here](https://github.com/patrick-kw-chiu/annotative-code/blob/main/src/annotative/types/types.ts#L27-L60).
+
+export const typeContent = `const projectName = '\_\_\_\_stringValue\_\_\_\_';
+const isWebComponent = \_\_\_\_booleanValue\_\_\_\_;
+const pi = \_\_\_\_numberValue\_\_\_\_;
+const cupOfCoffeeConsumed = \_\_\_\_integerValue\_\_\_\_;`;
+
+export const typeAnnotation = {
+  stringValue: {
+    type: 'string',
+    value: 'annotative-code',
+  },
+  booleanValue: {
+    type: 'boolean',
+    value: true,
+  },
+  numberValue: {
+    type: 'number',
+    value: 3.14,
+  },
+  integerValue: {
+    type: 'integer',
+    value: 3,
+  },
+};
+
+<Accordion label={'Quick Example:'} defaultOpened>
+  <AnnotativeCode
+    languageFn={languageFn}
+    themeCss={themeCss}
+    content={typeContent}
+    annotation={typeAnnotation}
+    styleMap={styleMap}
+  />
+  <br />
+  <Accordion label={'Source Code:'}>
+    <AnnotativeCode
+      languageFn={languageFn}
+      themeCss={themeCss}
+      content={content
+        .replace('{{annotation}}', JSON.stringify(typeAnnotation, null, 2))
+        .replace('{{content}}', typeContent)}
+      styleMap={styleMap}
+    />
+  </Accordion>
+</Accordion>
+
+#### value

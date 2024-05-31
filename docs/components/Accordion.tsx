@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-const Accordion = ({ label = '', children }) => {
-  const [open, setOpen] = useState(false);
+const Accordion = ({ label = '', children, defaultOpened = false }) => {
+  const [open, setOpen] = useState(defaultOpened);
 
   return (
     <div
