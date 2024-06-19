@@ -4,46 +4,28 @@ import AnnotativeCode from '../../components/Demo/AnnotativeCode.tsx';
 import languageFn from 'annotative-code/bin/highlight.js/languages/javascript';
 import themeCss from 'annotative-code/bin/highlight.js/css/a11y-dark';
 
+import {
+  contentTemplate,
+  styleMap,
+  innerAccordionStyle,
+} from '../../constants/constants';
+
 JSON object to specify what to annotate inside `content`.
 
 - The `key`(s) will be used to search for placeholder
-- The **value** object contains the configuration (**This page will focus on the available options of the value**)
+- The **configuration** object (**This page will focus on the available options in the configuration**)
 
 export const annotation = {
   projectName: {
     type: 'string',
-    value: 'annotative-code'
-  }
-}
-
-export const content = `import languageFn from 'annotative-code/bin/highlight.js/languages/javascript';
-
-const content = \`{{content}}\`
-
-const annotation = {{annotation}}
-
-<annotative-code
-  languageFn={languageFn}
-  content={content}
-  annotation={annotation}
-/>`;
+    value: 'annotative-code',
+  },
+};
 
 export const javaScriptContent = `const projectName = '\_\_\_\_projectName\_\_\_\_';
 console.log({ projectName })`;
 
-export const styleMap = { padding: '8px' };
-export const innerAccordionStyle = { paddingBottom: 0, fontSize: '1rem' };
-
-<Accordion label={'Quick Example:'}>
-  <AnnotativeCode
-    languageFn={languageFn}
-    themeCss={themeCss}
-    content={content
-      .replace('{{annotation}}', JSON.stringify(annotation, null, 2))
-      .replace('{{content}}', javaScriptContent)}
-    styleMap={styleMap}
-  />
-  <div style={{ textAlign: 'center', padding: '12px' }}>⬇️⬇️⬇️</div>
+<Accordion label={'Quick Example:'} defaultOpened>
   <AnnotativeCode
     languageFn={languageFn}
     themeCss={themeCss}
@@ -51,15 +33,28 @@ export const innerAccordionStyle = { paddingBottom: 0, fontSize: '1rem' };
     annotation={annotation}
     styleMap={styleMap}
   />
+  <br />
+  <Accordion label={'Source Code:'} style={innerAccordionStyle}>
+    <AnnotativeCode
+      languageFn={languageFn}
+      themeCss={themeCss}
+      content={contentTemplate
+        .replace('{{annotation}}', JSON.stringify(annotation, null, 2))
+        .replace('{{content}}', javaScriptContent)}
+      styleMap={styleMap}
+    />
+  </Accordion>
 </Accordion>
 
 ### Config Options
 
-| Option          | Type   | Default Value | Description                                                                                                           |
-| --------------- | ------ | ------------- | --------------------------------------------------------------------------------------------------------------------- |
-| [\*type](#type) | string | `"string"`    | `type` defines <br />- Styling of the annotation (powered by highlight.js)<br />- Input knob if `knob` is not defined |
-| \*value         | any    | n/a           | The default value passed to the annotation placeholder and the input knob                                             |
-| [\*knob](#knob) | string | `"string"`    | `knob` defines the input knob e.g. `select`, `date` and `color`                                                       |
+| Option                      | Type   | Default Value             | Description                                                                                                           |
+| --------------------------- | ------ | ------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| [\*type](#type)             | string | `"string"`                | `type` defines <br />- Styling of the annotation (powered by highlight.js)<br />- Input knob if `knob` is not defined |
+| [\*knob](#knob)             | string | `"string"`                | `knob` defines the input knob e.g. `select`, `date` and `color`                                                       |
+| \*value                     | any    | `undefined`               | The (default) value passed to the annotation placeholder and the input knob                                           |
+| [title](#title)             | string | the key of the annotation | If provided, the title will override the annotation key to be rendered in the popup                                   |
+| [description](#description) | string | `undefined`               | If provided, the description will be rendered under the [`knob`](#knob)                                               |
 
 #### type
 
@@ -102,7 +97,7 @@ export const typeAnnotation = {
   },
 };
 
-<Accordion label={'Quick Example:'} defaultOpened>
+<Accordion label={'Example:'} defaultOpened>
   <AnnotativeCode
     languageFn={languageFn}
     themeCss={themeCss}
@@ -115,13 +110,20 @@ export const typeAnnotation = {
     <AnnotativeCode
       languageFn={languageFn}
       themeCss={themeCss}
-      content={content
+      content={contentTemplate
         .replace('{{annotation}}', JSON.stringify(typeAnnotation, null, 2))
         .replace('{{content}}', typeContent)}
       styleMap={styleMap}
     />
   </Accordion>
 </Accordion>
+
+Inside the popup, type is also shown here (e.g. `type: 'boolean'`)
+
+<img
+  src="/annotative-code/props/annotation/type.png"
+  alt="props annotation type"
+/>
 
 #### knob
 
@@ -144,7 +146,8 @@ for `knob: 'select'`, you also need to pass the available `options`.
 export const knobContent = `const fruitSelect = '\_\_\_\_fruitSelect\_\_\_\_';
 const expiryDate = \_\_\_\_expiryDate\_\_\_\_;
 const timeToEat = \_\_\_\_timeToEat\_\_\_\_;
-const dateTimeLocal = \_\_\_\_dateTimeLocal\_\_\_\_;`;
+const datetimeLocal = \_\_\_\_datetimeLocal\_\_\_\_;
+const colorPicker = \_\_\_\_color\_\_\_\_;`;
 
 export const knobAnnotation = {
   fruitSelect: {
@@ -164,15 +167,20 @@ export const knobAnnotation = {
     value: '10:30',
     knob: 'time',
   },
-  dateTimeLocal: {
+  datetimeLocal: {
     type: 'string',
     value: '2024-05-30T22:30',
     knob: 'datetime-local',
     min: '2024-05-20T01:30',
   },
+  color: {
+    type: 'string',
+    value: '#08bf2d',
+    knob: 'color',
+  },
 };
 
-<Accordion label={'Quick Example:'} defaultOpened>
+<Accordion label={'Example:'} defaultOpened>
   <AnnotativeCode
     languageFn={languageFn}
     themeCss={themeCss}
@@ -185,9 +193,95 @@ export const knobAnnotation = {
     <AnnotativeCode
       languageFn={languageFn}
       themeCss={themeCss}
-      content={content
+      content={contentTemplate
         .replace('{{annotation}}', JSON.stringify(knobAnnotation, null, 2))
         .replace('{{content}}', knobContent)}
+      styleMap={styleMap}
+    />
+  </Accordion>
+</Accordion>
+
+#### value
+
+`value` is the (default) value to render in the placeholder. See examples in [type](#type) or [knob](#knob).
+
+#### title
+
+If provided, the title will override the annotation key to be rendered in the popup
+
+export const titleContent = `const noTitle = '\_\_\_\_noTitle\_\_\_\_';
+const hasTitle = \_\_\_\_hasTitle\_\_\_\_;`;
+
+export const titleAnnotation = {
+  noTitle: {
+    type: 'string',
+    value: '🍎 apple',
+    knob: 'select',
+    options: ['🍎 apple', '🍊 orange', '🍌 banana'],
+  },
+  hasTitle: {
+    type: 'string',
+    value: '2024-05-30',
+    knob: 'date',
+    min: '2024-05-20',
+    title: 'a-customized-title',
+  },
+};
+
+<Accordion label={'Example:'} defaultOpened>
+  <AnnotativeCode
+    languageFn={languageFn}
+    themeCss={themeCss}
+    content={titleContent}
+    annotation={titleAnnotation}
+    styleMap={styleMap}
+  />
+  <br />
+  <Accordion label={'Source Code:'} style={innerAccordionStyle}>
+    <AnnotativeCode
+      languageFn={languageFn}
+      themeCss={themeCss}
+      content={contentTemplate
+        .replace('{{annotation}}', JSON.stringify(titleAnnotation, null, 2))
+        .replace('{{content}}', titleContent)}
+      styleMap={styleMap}
+    />
+  </Accordion>
+</Accordion>
+
+#### description
+
+If provided, the description will be rendered under the [`knob`](#knob)
+
+export const descriptionContent = `const hasDescription = '\_\_\_\_hasDescription\_\_\_\_';`;
+
+export const descriptionAnnotation = {
+  hasDescription: {
+    type: 'number',
+    value: 42,
+    description: 'the ultimate answer to everything',
+  },
+};
+
+<Accordion label={'Example:'} defaultOpened>
+  <AnnotativeCode
+    languageFn={languageFn}
+    themeCss={themeCss}
+    content={descriptionContent}
+    annotation={descriptionAnnotation}
+    styleMap={styleMap}
+  />
+  <br />
+  <Accordion label={'Source Code:'} style={innerAccordionStyle}>
+    <AnnotativeCode
+      languageFn={languageFn}
+      themeCss={themeCss}
+      content={contentTemplate
+        .replace(
+          '{{annotation}}',
+          JSON.stringify(descriptionAnnotation, null, 2),
+        )
+        .replace('{{content}}', descriptionContent)}
       styleMap={styleMap}
     />
   </Accordion>

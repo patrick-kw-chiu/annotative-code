@@ -1,8 +1,15 @@
 import { Tabs } from 'nextra/components';
+import Accordion from '../../Accordion.tsx';
 import AnnotativeCode from '../../Demo/AnnotativeCode.tsx';
 
 import languageFn from 'annotative-code/bin/highlight.js/languages/javascript';
 import themeCss from 'annotative-code/bin/highlight.js/css/a11y-dark';
+
+import {
+  contentTemplate,
+  styleMap,
+  innerAccordionStyle,
+} from '../../../constants/constants';
 
 JSON object to specify what to annotate inside `content`.
 The `key`(s) will be used to search for placeholder and the value object contains the configuration.
@@ -25,30 +32,23 @@ const content = \`{{content}}\`
 export const javaScriptContent = `const projectName = '\_\_\_\_projectName\_\_\_\_';
 console.log({ projectName })`;
 
-export const styleMap = { padding: '8px' };
-
-**Example:**<br />
-
-<AnnotativeCode
-  languageFn={languageFn}
-  themeCss={themeCss}
-  content={content
-    .replace('{{annotation}}', JSON.stringify(annotation, null, 2))
-    .replace('{{content}}', javaScriptContent)}
-  styleMap={styleMap}
-/>
-<div
-  style={{
-    textAlign: 'center',
-    padding: '12px',
-  }}
->
-  ⬇️⬇️⬇️
-</div>
-<AnnotativeCode
-  languageFn={languageFn}
-  themeCss={themeCss}
-  content={javaScriptContent}
-  annotation={annotation}
-  styleMap={styleMap}
-/>
+<Accordion label={'Example:'} defaultOpened>
+  <AnnotativeCode
+    languageFn={languageFn}
+    themeCss={themeCss}
+    content={javaScriptContent}
+    annotation={annotation}
+    styleMap={styleMap}
+  />
+  <br />
+  <Accordion label={'Source Code:'} style={innerAccordionStyle}>
+    <AnnotativeCode
+      languageFn={languageFn}
+      themeCss={themeCss}
+      content={contentTemplate
+        .replace('{{annotation}}', JSON.stringify(annotation, null, 2))
+        .replace('{{content}}', javaScriptContent)}
+      styleMap={styleMap}
+    />
+  </Accordion>
+</Accordion>
