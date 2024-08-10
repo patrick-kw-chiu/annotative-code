@@ -17,7 +17,7 @@ body {
 }
 
 .container {
-  padding: 16px;
+  /* padding: 16px; */
 }
 
 @media (prefers-color-scheme: light) {

@@ -99,6 +99,8 @@ A new line.`,
     // styleMap: {
     //   padding: '0 32px',
     // },
+    fontSize: '12px',
+    showCredentials: true,
   },
   {
     id: 'block-2',
@@ -244,15 +246,15 @@ print('The sum of {0} and {1} is {2}'.format(num1, num2, sum))`,
   },
 ];
 
-const props = [
-  'languageFn',
-  'themeCss',
-  'content',
-  'annotation',
-  'annotationMask',
-  'encloser',
-  'styleMap',
-];
+// const props = [
+//   'languageFn',
+//   'themeCss',
+//   'content',
+//   'annotation',
+//   'annotationMask',
+//   'encloser',
+//   'styleMap',
+// ];
 blocks.forEach((block) => {
   // if (block.id !== 'block-2') {
   //   return;

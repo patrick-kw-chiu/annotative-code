@@ -100,6 +100,8 @@ export interface AnnotativeCodeFull {
   annotationMask?: string;
   encloser?: string;
   styleMap?: Record<string, string>;
+  fontSize?: string;
+  showCredentials?: boolean;
   onValueChange?: ({ detail }: { detail: ValueChangeDetail }) => any;
 }
 

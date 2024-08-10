@@ -45,6 +45,7 @@ export class AnnotativeBaseComponent extends LitElement {
         white-space: pre;
         text-wrap: wrap;
         line-height: 1.25;
+        padding: 8px;
       }
       .annotative-code-annotation-container {
         display: inline-block;
@@ -102,6 +103,18 @@ export class AnnotativeBaseComponent extends LitElement {
         height: 24px;
         cursor: pointer;
       }
+
+      .credentials, a:-webkit-any-link {
+        padding-top: 8px;
+        text-align: right;
+        opacity: 0.8;
+        text-decoration: none;
+        color: unset;
+      }
+      .credentials:hover {
+        opacity: 1;
+        text-decoration: underline;
+      }
     `,
   ];
 
@@ -126,11 +139,17 @@ export class AnnotativeBaseComponent extends LitElement {
   @property({ attribute: false })
   styleMap?: StyleInfo = {};
 
+  @property({ attribute: 'fontSize' })
+  fontSize?: '';
+
   @property({ attribute: 'encloser' })
   encloser?: string = '____';
 
   @property({ attribute: 'annotationMask' })
   annotationMask?: string = '{{{{____annotation____}}}}';
+
+  @property({ attribute: false })
+  showCredentials?: boolean = false;
 
   // States
   @state()
@@ -362,7 +381,7 @@ export class AnnotativeBaseComponent extends LitElement {
       '500': lightenOrDarken(style.backgroundColor, 8 + 16 * 2),
       '700': lightenOrDarken(style.backgroundColor, 8 + 16 * 3),
       '900': lightenOrDarken(style.backgroundColor, 8 + 16 * 4),
-    }
+    };
     const popupStyle = {
       backgroundColor: grayColor['100'],
       borderColor: grayColor['300'],
@@ -382,7 +401,10 @@ export class AnnotativeBaseComponent extends LitElement {
     };
 
     return html`
-      <div id="annotative-code">
+      <div
+        id="annotative-code"
+        style="${styleMap({ fontSize: this.fontSize ?? '14px' })}"
+      >
         <style>
           ${this.themeCss}
         </style>
@@ -443,6 +465,14 @@ export class AnnotativeBaseComponent extends LitElement {
                 .value=${this._copyValue}
               />
             </div>
+            ${this.showCredentials
+              ? html`<div class="credentials">
+                  <a
+                    href="https://github.com/patrick-kw-chiu/annotative-code"
+                    target="_blank"
+                  >⚡ Annotative Code</a>
+                </div>`
+              : null}
           </div>
           <div class="close" @click=${this._onTriggerCopyPopup}>${close}</div>
         </div>
