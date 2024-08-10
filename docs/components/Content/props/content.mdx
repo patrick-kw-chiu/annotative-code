@@ -1,9 +1,16 @@
 import { Tabs } from 'nextra/components';
 import AnnotativeCode from '../../Demo/AnnotativeCode.tsx';
+import Accordion from '../../Accordion.tsx';
 
 import javaScriptFn from 'annotative-code/bin/highlight.js/languages/javascript';
 import typeScriptFn from 'annotative-code/bin/highlight.js/languages/typescript';
 import themeCss from 'annotative-code/bin/highlight.js/css/a11y-dark';
+
+import {
+  contentTemplate,
+  styleMap,
+  innerAccordionStyle,
+} from '../../../constants/constants';
 
 Content (code) to be highlighted and annotated. Below is a TypeScript example.
 
@@ -20,27 +27,23 @@ export const typeScriptContent = `interface Person {
 
 const greet = (person: Person) => "Hello " + person.name`;
 
-export const styleMap = { padding: '8px' };
-
-**Example:**<br />
-
-<AnnotativeCode
-  languageFn={javaScriptFn}
-  themeCss={themeCss}
-  content={content.replace('{{content}}', typeScriptContent)}
-  styleMap={styleMap}
-/>
-<div
-  style={{
-    textAlign: 'center',
-    padding: '12px',
-  }}
->
-  ⬇️⬇️⬇️
-</div>
-<AnnotativeCode
-  languageFn={typeScriptFn}
-  themeCss={themeCss}
-  content={typeScriptContent}
-  styleMap={styleMap}
-/>
+<Accordion label={'Example:'} defaultOpened>
+  <AnnotativeCode
+    languageFn={typeScriptFn}
+    themeCss={themeCss}
+    content={typeScriptContent}
+    styleMap={styleMap}
+  />
+  <br />
+  <Accordion label={'Source Code:'} style={innerAccordionStyle}>
+    <AnnotativeCode
+      languageFn={typeScriptFn}
+      themeCss={themeCss}
+      content={contentTemplate
+        .replace('javascript', 'typescipt')
+        .replace('\n\nconst annotation = {{annotation}}', '')
+        .replace('{{content}}', typeScriptContent)}
+      styleMap={styleMap}
+    />
+  </Accordion>
+</Accordion>

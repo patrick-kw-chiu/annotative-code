@@ -7,6 +7,8 @@ import themeCssA11yLight from 'annotative-code/bin/highlight.js/css/a11y-light';
 import themeCssGithub from 'annotative-code/bin/highlight.js/css/github';
 import themeCssGoogleCode from 'annotative-code/bin/highlight.js/css/googlecode';
 
+import { styleMap } from '../../../constants/constants';
+
 CSS string containing styling of the highlighted class. [Themes](https://github.com/highlightjs/highlight.js/tree/main/src/styles) examples: `a11y-dark`, `a11y-light`, `github`, `googlecode` and more.
 
 export const content = `import themeCss from 'annotative-code/bin/highlight.js/css/theme';
@@ -15,8 +17,6 @@ const name = 'Patrick';
 console.log({ name });
 
 <annotative-code themeCss={themeCss} />`;
-
-export const styleMap = { padding: '8px' };
 
 **Example:**<br />
 
