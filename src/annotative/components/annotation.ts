@@ -9,7 +9,10 @@ import { ref, createRef, Ref } from 'lit/directives/ref.js';
 import { computePopupStyle } from '../utilities/utilities.js';
 
 // Styles
-import { backgroundAnimation, underlineAnimation } from '../styles/animation.js';
+import {
+  backgroundAnimation,
+  underlineAnimation,
+} from '../styles/animation.js';
 import { popupStyle } from '../styles/popup.js';
 
 // Types
@@ -91,10 +94,17 @@ export class AnnotativeAnnotation extends LitElement {
     isBgLight,
     popupStyle = this.popupStyle,
   }: CustomRenderingProps) => {
-    const { type, title, description, isEditable, renderDescription } = config;
+    const {
+      type,
+      typeText,
+      title,
+      description,
+      isEditable,
+      renderDescription,
+    } = config;
     return html`<div>
       <div class="">
-        <span>${type}</span>
+        <span>${typeText ?? type}</span>
         <span style="color: ${popupStyle.textColor}">${title ?? key}</span>
       </div>
       <div style="color: ${popupStyle.textColor}">
@@ -134,8 +144,7 @@ export class AnnotativeAnnotation extends LitElement {
     if (this._showPopup) {
       this._showPopup = false;
 
-      (annotationElement.value.offsetParent as HTMLElement).style.zIndex =
-        '20';
+      (annotationElement.value.offsetParent as HTMLElement).style.zIndex = '20';
       return;
     }
 

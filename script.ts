@@ -43,6 +43,7 @@ const blocks: (AnnotativeCodeFullWithId | AnnotativeCodeWithId)[] = [
     annotation: {
       showSummary: {
         type: 'boolean',
+        // typeText: 'true or false',
         value: true,
         description: `If set to \`true\`, a summary of "26 activities in this period" will be displayed in the bottom left of the component.
         

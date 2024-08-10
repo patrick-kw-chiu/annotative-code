@@ -86,6 +86,7 @@ export interface AnnotationConfig {
   shouldValidateJson?: true;
   // popup basic
   title?: string;
+  typeText?: string;
   description?: string;
   // popup advanced
   customPopupPayload?: any;
