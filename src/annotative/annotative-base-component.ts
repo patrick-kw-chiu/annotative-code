@@ -140,7 +140,7 @@ export class AnnotativeBaseComponent extends LitElement {
   styleMap?: StyleInfo = {};
 
   @property({ attribute: 'fontSize' })
-  fontSize?: '';
+  fontSize?: string = '';
 
   @property({ attribute: 'encloser' })
   encloser?: string = '____';

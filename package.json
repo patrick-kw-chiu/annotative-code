@@ -1,6 +1,6 @@
 {
   "name": "annotative-code",
-  "version": "0.1.30",
+  "version": "0.1.31",
   "description": "Supercharge your code demo with interactive input knobs",
   "type": "module",
   "main": "bin/annotative-code.js",
